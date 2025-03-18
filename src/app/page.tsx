@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image, { StaticImageData } from "next/image";
-import image1 from "@/assets/images/project1.jpg"; // Perbaikan path import
-import image2 from "@/assets/images/project2.jpg";
+import Image from "next/image";
+import profilePic from "@/assets/images/project1.jpg"; // Pastikan gambar ada di folder 'public/images'
 
 export const metadata: Metadata = {
   title: "Tentang Saya",
@@ -12,65 +11,69 @@ export const metadata: Metadata = {
   },
 };
 
-type ProjectItemProps = {
-  name: string;
-  url: string;
-  urlDisplay: string;
-  imageSrc: StaticImageData;
-};
-
-function ProjectItem({ name, url, urlDisplay, imageSrc }: ProjectItemProps) {
+export default function AboutMe() {
   return (
-    <li>
-      <a href={url}>
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-          <Image 
-            className="w-full" 
-            src={imageSrc} 
-            alt={name} 
-            width={500} 
-            height={300} // Tambahkan width & height
-            priority // Opsional: mempercepat loading
-          />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{name}</div>
-          </div>
-          <div className="px-6 pb-4">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              {urlDisplay}
-            </span>
-          </div>
-        </div>
-      </a>
-    </li>
-  );
-}
-
-export default function Projects() {
-  return (
-    <div className="mt-16 px-8">
-      <header>
-        <h1 className="font-bold text-4xl text-zinc-800">Proyek Saya</h1>
-        <p className="text-base mt-6 text-zinc-600">
-          Berikut adalah beberapa proyek yang telah saya kerjakan.
+    <div className="max-w-4xl mx-auto p-8">
+      {/* Header */}
+      <header className="text-center mb-12">
+        <h1 className="font-bold text-4xl text-zinc-800">Tentang Saya</h1>
+        <p className="text-zinc-600 mt-2">
+          Halo! Saya seorang pengembang web dengan passion di bidang teknologi dan desain UI/UX.
         </p>
       </header>
-      <div className="mt-16">
-        <h2 className="text-2xl">Aplikasi</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16 mt-8">
-          <ProjectItem
-            name="Aplikasi 1"
-            url="https://example.com"
-            urlDisplay="App Store"
-            imageSrc={image1}
+
+      {/* Profile Section */}
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        {/* Profile Image */}
+        <div className="w-80 h-40 relative">
+          <Image
+            src={profilePic}
+            alt="Foto Profil"
+            layout="fill"
+            className="rounded-full shadow-lg object-cover"
           />
-          <ProjectItem
-            name="Aplikasi 2"
-            url="https://example.com"
-            urlDisplay="Google Play"
-            imageSrc={image2}
-          />
-        </ul>
+        </div>
+
+        {/* About Me Text */}
+        <div>
+          <p className="text-zinc-700 text-lg leading-relaxed">
+            Saya memiliki pengalaman dalam pengembangan web menggunakan 
+            <span className="text-teal-500"> React.js, Next.js</span>, dan 
+            <span className="text-teal-500"> Tailwind CSS</span>.  
+            Saya tertarik untuk membangun aplikasi yang cepat, responsif, dan menarik secara visual.
+          </p>
+          <p className="text-zinc-600 mt-4">
+            Selain pengembangan web, saya juga menyukai dunia open-source dan sering berkontribusi dalam berbagai proyek komunitas.
+          </p>
+        </div>
+      </div>
+
+      {/* Social Links */}
+      <div className="mt-8 text-center">
+        <h2 className="text-xl font-semibold text-zinc-800 mb-4">Hubungi Saya</h2>
+        <div className="flex justify-center gap-4">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            className="text-teal-500 hover:text-teal-700 transition"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            className="text-teal-500 hover:text-teal-700 transition"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            className="text-teal-500 hover:text-teal-700 transition"
+          >
+            Twitter
+          </a>
+        </div>
       </div>
     </div>
   );
